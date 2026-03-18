@@ -17,13 +17,16 @@ int main() {
         printf("O endereco da variavel c eh: %ld\n", &c);
 
         //imprime conteudo das variaveis do tipo ponteiro
-        printf("pn aponta para o endereco de n que eh: %ld\n", pn);
-        printf("pc aponta para o endereco de c que eh: %ld\n", pc);
+        printf("pn aponta para o endereco de n que eh: %p\n", pn);
+        printf("pc aponta para o endereco de c que eh: %p\n", pc);
 
         //imprime conteudo das variaveis apontadass pelos ponteiros
         printf("No endereco apontado por pn esta o conteudo: %d\n", *pn);
         printf("No endereco apontado por pc esta o conteudo: %d\n", *pc);
 
+        *pn = 20;
+        printf("Agora no endereco apontado por pn esta o conteudo: %d\n", *pn);
+        
 
 
 
