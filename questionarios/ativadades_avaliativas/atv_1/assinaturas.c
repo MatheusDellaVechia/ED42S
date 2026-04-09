@@ -82,9 +82,10 @@ void imprimeContratante(Contratante *contratante)
     printf("Nome: %s\n", contratante->nome);
     printf("Data de Nascimento: ");
     imprimeData(contratante->dataNascimento);
+    printf("--------------------------\n");
     printf("Servicos contratados:\n");
     for (int i = 0; i < contratante->quantidadeServicos; i++)
-    {   
+    {
         imprimeServico(&contratante->servicos[i]);
     }
 }

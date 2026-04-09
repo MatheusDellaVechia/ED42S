@@ -7,7 +7,7 @@ typedef struct contratante Contratante;
 
 Data *novaData(int dia, int mes, int ano);
 
-Servico *novoServico(Servico *vet, char descricao[], float valor,int quantidadeServicos);
+Servico *novoServico(Servico *vet, char descricao[], float valor, int quantidadeServicos);
 
 Contratante *novoContratante(Contratante *vet, char nome[], int indiceContratante, int quantidadeServicos, Servico *servicos, Data *dataNascimento);
 

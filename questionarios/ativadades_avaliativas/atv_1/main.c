@@ -16,9 +16,8 @@ int main()
 
     int outroServico, outroContratante, quantidadeServicos = 0, quantidadeContratantes = 0;
 
-    printf("####################################################\n");
     printf("Gestao de Streamings\n");
-    printf("####################################################\n");
+    printf("-------------------------\n");
 
     do
     {
@@ -43,7 +42,6 @@ int main()
             servicos = novoServico(servicos, descricao, valor, quantidadeServicos);
             quantidadeServicos++;
 
-
             printf("Deseja informar outro servico para o contratante ? [1] S [0] N: ");
             scanf("%d", &outroServico);
             setbuf(stdin, NULL);
@@ -56,11 +54,9 @@ int main()
         setbuf(stdin, NULL);
     } while (outroContratante);
 
-    printf("####################################################\n");
     printf("Dados cadastrados\n");
-    printf("####################################################\n\n");
+    printf("-------------------------------\n\n");
 
     imprimeContratantes(contratante, quantidadeContratantes);
     freeContratante(contratante);
-
 }
