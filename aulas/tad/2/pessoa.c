@@ -3,10 +3,10 @@
 #include <string.h>
 #include "pessoa.h"
 
-typedef struct pessoa  {
+struct pessoa  {
     char nome[30];
     int idade;
-} Pessoa;
+};
 
 Pessoa *inserePessoas(Pessoa *vet, char nome[], int idade, int numeroPessoas) {
     if (numeroPessoas == 0) {
