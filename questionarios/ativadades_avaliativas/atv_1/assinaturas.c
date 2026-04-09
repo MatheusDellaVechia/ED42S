@@ -109,9 +109,11 @@ void freeServico(Servico *servicos)
     free(servicos);
 }
 
-void freeContratante(Contratante *contratante)
-{
-    freeData(contratante->dataNascimento);
-    freeServico(contratante->servicos);
+void freeContratante(Contratante *contratante, int quantidade)
+{   
+    for (int i = 0; i < quantidade; i++) {
+        freeData(contratante[i].dataNascimento);
+        freeServico(contratante[i].servicos);
+    }
     free(contratante);
 }

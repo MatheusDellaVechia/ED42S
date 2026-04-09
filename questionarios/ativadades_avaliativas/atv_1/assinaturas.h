@@ -23,6 +23,6 @@ void freeData(Data *data);
 
 void freeServico(Servico *servico);
 
-void freeContratante(Contratante *contratante);
+void freeContratante(Contratante *contratante, int quantidade);
 
 #endif

@@ -20,7 +20,8 @@ int main()
     printf("-------------------------\n");
 
     do
-    {
+    {    
+        setbuf(stdin, NULL);
         printf("Informe o nome do contratante %d: ", quantidadeContratantes);
         scanf("%[^\n]s", nome);
         setbuf(stdin, NULL);
@@ -58,5 +59,5 @@ int main()
     printf("-------------------------------\n\n");
 
     imprimeContratantes(contratante, quantidadeContratantes);
-    freeContratante(contratante);
+    freeContratante(contratante, quantidadeContratantes);
 }
