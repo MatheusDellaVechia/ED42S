@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "marketplace.h"
+#include "doadores.h"
 
 struct item
 {
     int chave;
     char nome[50];
-    char categoria[30];
-    char vendedor[30];
-    float preco;
+    char documento[20];
+    char contato[20];
+    char tipoSanguineo[5];
 };
 
 struct fila
@@ -20,7 +20,7 @@ struct fila
     int tamanho;
 };
 
-Item *insereProduto(Item *vet, int qtd, int chave, char nome[], char categoria[], char vendedor[], float preco)
+Item *insereDoador(Item *vet, int qtd, int chave, char nome[], char documento[], char contato[], char tipoSanguineo[])
 {
     if (qtd == 0)
     {
@@ -33,72 +33,63 @@ Item *insereProduto(Item *vet, int qtd, int chave, char nome[], char categoria[]
 
     vet[qtd].chave = chave;
     strcpy(vet[qtd].nome, nome);
-    strcpy(vet[qtd].categoria, categoria);
-    strcpy(vet[qtd].vendedor, vendedor);
-    vet[qtd].preco = preco;
+    strcpy(vet[qtd].documento, documento);
+    strcpy(vet[qtd].contato, contato);
+    strcpy(vet[qtd].tipoSanguineo, tipoSanguineo);
     return vet;
 }
 
-void troca(Item *a, Item *b)
+int separa(Item vetor[], int posicaoInicio, int posicaoFim)
 {
-    Item temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
-int particiona(Item *vet, int inicio, int fim)
-{
-    char pivo[50];
-    strcpy(pivo, vet[fim].nome);
-    int i = inicio - 1;
-
-    for (int j = inicio; j < fim; j++)
+    Item pivo = vetor[posicaoFim];
+    int esquerda = posicaoInicio;
+    int atual;
+    Item aux;
+    for (atual = posicaoInicio; atual < posicaoFim; atual++)
     {
-        if (strcmp(vet[j].nome, pivo) <= 0)
+        if (strcmp(vetor[atual].nome, pivo.nome) <= 0)
         {
-            i++;
-            troca(&vet[i], &vet[j]);
+            aux = vetor[atual];
+            vetor[atual] = vetor[esquerda];
+            vetor[esquerda] = aux;
+            esquerda++;
         }
     }
-    troca(&vet[i + 1], &vet[fim]);
-    return i + 1;
+    aux = vetor[esquerda];
+    vetor[esquerda] = vetor[posicaoFim];
+    vetor[posicaoFim] = aux;
+    return esquerda;
 }
 
-void quicksort(Item *vet, int inicio, int fim)
+void quickSort(Item vetor[], int posicaoInicio, int posicaoFim)
 {
-    if (inicio < fim)
+    if (posicaoInicio < posicaoFim)
     {
-        int p = particiona(vet, inicio, fim);
-        quicksort(vet, inicio, p - 1);
-        quicksort(vet, p + 1, fim);
+        int metade = separa(vetor, posicaoInicio, posicaoFim);
+        quickSort(vetor, posicaoInicio, metade - 1);
+        quickSort(vetor, metade + 1, posicaoFim);
     }
 }
 
-void ordenaPorNome(Item *vet, int qtd)
+int pesquisaBinaria(Item v[], int n, char chave[])
 {
-    quicksort(vet, 0, qtd - 1);
-}
-
-int pesquisaBinariaPorNome(Item *vet, int qtd, char nome[])
-{
-    int inicio = 0, fim = qtd - 1;
-
-    while (inicio <= fim)
+    int primeiro = 0;
+    int ultimo = n - 1;
+    int meio;
+    while (primeiro <= ultimo)
     {
-        int meio = (inicio + fim) / 2;
-        int cmp = strcmp(nome, vet[meio].nome);
-
-        if (cmp == 0)
+        meio = (primeiro + ultimo) / 2;
+        if (strcmp(v[meio].nome, chave) == 0)
         {
             return meio;
         }
-        else if (cmp < 0)
+        else if (strcmp(v[meio].nome, chave) > 0)
         {
-            fim = meio - 1;
+            ultimo = meio - 1;
         }
         else
         {
-            inicio = meio + 1;
+            primeiro = meio + 1;
         }
     }
     return -1;
@@ -107,10 +98,10 @@ int pesquisaBinariaPorNome(Item *vet, int qtd, char nome[])
 void imprimeItem(Item item)
 {
     printf("Chave: %d\n", item.chave);
-    printf("Produto: %s\n", item.nome);
-    printf("Categoria: %s\n", item.categoria);
-    printf("Vendedor: %s\n", item.vendedor);
-    printf("Preco: R$ %.2f\n", item.preco);
+    printf("Nome: %s\n", item.nome);
+    printf("Documento: %s\n", item.documento);
+    printf("Contato: %s\n", item.contato);
+    printf("Tipo Sanguineo: %s\n", item.tipoSanguineo);
     printf("--------------------------\n");
 }
 
